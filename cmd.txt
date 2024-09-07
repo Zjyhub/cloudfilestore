@@ -1,0 +1,15 @@
+sudo docker run -d \
+--name mysql-master \
+-p 13306:3306 \
+-v /data/mysql/conf/master.conf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+-v /data/mysql/datam:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=031024 \
+mysql:5.7
+
+sudo docker run -d \
+--name mysql-slave \
+-p 13307:3306 \
+-v /data/mysql/conf/slave.conf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+-v /data/mysql/datas:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=031024 \
+mysql:5.7
