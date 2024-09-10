@@ -97,6 +97,7 @@
       url: "/file/query?" + queryParams(),
       type: "POST",
       data: {
+        // username: document.getElementById('username').innerHTML,
         limit: 15
       },
       error: function (err) {
@@ -106,20 +107,20 @@
         if (!body) {
           return;
         }
-        var data = body;
+        var data = JSON.parse(body);
         if (!data || data.length <= 0) {
           return;
         }
 
         var dlHost = 'http://localhost:8080';
-        var dlEntry = localStorage.getItem('downloadEntry');
-        if (dlEntry != '') {
-          if (dlEntry.indexOf('http:')<0) {
-            dlHost = 'http://' + dlEntry;
-          } else {
-            dlHost = dlEntry;
-          }
-        }
+        // var dlEntry = localStorage.getItem('downloadEntry');
+        // if (dlEntry != '') {
+        //   if (dlEntry.indexOf('http:')<0) {
+        //     dlHost = 'http://' + dlEntry;
+        //   } else {
+        //     dlHost = dlEntry;
+        //   }
+        // }
         
         var downloadHtml = '<button class="btn btn-info" ' +
           'style="height:30px;margin:5px 3px;"' +

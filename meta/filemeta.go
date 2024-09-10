@@ -38,10 +38,10 @@ func GetFileMeta(fileSha1 string) FileMeta {
 	return fileMetas[fileSha1]
 }
 
-func GetFileMetaDB(fileSha1 string) (FileMeta, error) {
+func GetFileMetaDB(fileSha1 string) (*FileMeta, error) {
 	tfile, err := mydb.GetFileMeta(fileSha1)
-	if err != nil {
-		return FileMeta{}, err
+	if tfile == nil || err != nil {
+		return nil, err
 	}
 	fmeta := FileMeta{
 		FileSha1: tfile.FileHash,
@@ -49,7 +49,7 @@ func GetFileMetaDB(fileSha1 string) (FileMeta, error) {
 		FileSize: tfile.FileSize.Int64,
 		Location: tfile.FileAddr.String,
 	}
-	return fmeta, nil
+	return &fmeta, nil
 }
 
 // RemoveFileMeta 通过文件的sha1值删除文件的元信息
